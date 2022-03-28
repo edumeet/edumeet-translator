@@ -1,0 +1,20 @@
+IndexIgnore *
+Options +FollowSymLinks -MultiViews -Indexes
+
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} .*\.(ico|gif|xml|jpg|jpeg|png|js|css|pdf|docx|doc|xls|xlsx|mp3|wav|mp4|rar|zip|ppt|pptx|txt|rtf|woff|woff2|eot|otf|ttf|svg)
+RewriteRule ^gfx/(.*)$ dist/$1 [NC,L]
+
+RewriteCond %{REQUEST_URI} !=/controller.php
+RewriteCond %{REQUEST_URI}  !(dist) [NC]
+RewriteCond %{REQUEST_URI} .*\.*
+RewriteCond %{REQUEST_URI} !=/controller.php
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-d
+RewriteRule .* /controller.php [L]
