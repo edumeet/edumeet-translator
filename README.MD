@@ -1,7 +1,8 @@
 # Edumeet Translator Web Application
 ## Dependency
+```sh
 sudo curl -sSL https://get.docker.com/ | sh
-
+```
 ## Run it in few easy steps
 ### Build and run docker image
 `-b` parameter is represent for build docker image
