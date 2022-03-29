@@ -3,11 +3,12 @@ th.checkbox::before, th.checkbox::after {
 }
 
 footer {
-    position: fixed;
+    position: fixed !important;
     bottom: 2vh;
     right: 1vw;
     width: 100%;
     opacity: 0.5;
+    z-index: -99;
 }
 
 table>tbody>tr {
