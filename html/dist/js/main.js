@@ -537,7 +537,6 @@ var App = {
   getListOfLanguages: function (self) {
     $('#dataTables').dataTable().fnDestroy();
     $("#translation-files-list").text("");
-    console.log(self.locales);
     $.each(JSON.parse(localStorage.getItem(localStorage.getItem("currentBranch"))), function (lang, content) {
       var str = "<tr branch=\"" + localStorage.getItem("currentBranch") + "\" class=\"text-center align-middle checkbox\">";
       str += "<td class=\"input\" style=\"width:25px;\"><input type=\"checkbox\" class=\"form-check-input\" name=\"lang[]\" value=" + lang + " /></td>";
