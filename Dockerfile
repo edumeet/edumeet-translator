@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-RUN apt update && apt install git -y
+RUN apt-get update && apt-get -yq install git
 #RUN docker-php-ext-install pdo_sqlite
 WORKDIR /var/www/html/
 
