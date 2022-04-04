@@ -1,9 +1,6 @@
 # Edumeet Translator Web Application
-[!({https://user-images.githubusercontent.com/44652322/161519803-703ac76e-13bb-45c4-9ad4-e10a7a6d9200.mp4} "Promo video")]
 
-
-
-
+https://user-images.githubusercontent.com/44652322/161520435-36f74e38-0b3f-4bf6-9724-4368d78370d4.mp4
 
 ## Dependency
 ```sh
