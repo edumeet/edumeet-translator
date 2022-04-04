@@ -1,4 +1,6 @@
 # Edumeet Translator Web Application
+[![Edumeet translator promo video]({/docs/promo_img.png})]({/docs/promo_vid.mp4} "Link Title")
+
 ## Dependency
 ```sh
 sudo curl -sSL https://get.docker.com/ | sh
