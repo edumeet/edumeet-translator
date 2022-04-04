@@ -1,5 +1,5 @@
 # Edumeet Translator Web Application
-({https://user-images.githubusercontent.com/44652322/161519803-703ac76e-13bb-45c4-9ad4-e10a7a6d9200.mp4} "Promo video")
+[!({https://user-images.githubusercontent.com/44652322/161519803-703ac76e-13bb-45c4-9ad4-e10a7a6d9200.mp4} "Promo video")]
 
 
 
