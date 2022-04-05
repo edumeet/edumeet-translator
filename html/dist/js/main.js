@@ -772,6 +772,16 @@ $(document).ready(function () {
   $(document).on("click", ".edit", function (e) {
     e.stopPropagation();
   });
+  $(document).on("click", "#reset-branch", function (e) {
+    e.stopPropagation();
+    if (window.confirm("Are you sure that drop all modification and get data from repository?")) {
+      $(".loader").show();
+      $('#changebranch').modal('toggle')
+      UserInstance.changeBranch(UserInstance, $("#set-branch"));
+    } else {
+
+    }
+  });
   $(document).on("keydown", "#edit-form-tbody input", function (e) {
     var col = $(this).closest("td").index();
     var row = $(this).closest("tr").index();
@@ -812,9 +822,11 @@ $(document).ready(function () {
     }
   });
   $(document).on("change", "#set-branch", function (e) {
-    $(".loader").show();
-    $('#changebranch').modal('toggle')
-    UserInstance.changeBranch(UserInstance, this);
+    if (window.confirm("Are you sure that drop all modification and get data from repository?")) {
+      $(".loader").show();
+      $('#changebranch').modal('toggle')
+      UserInstance.changeBranch(UserInstance, this);
+    }
   });
   $(document).on("click", ".compare", function () {
     var compare = UserInstance.tables.$("input:checked").serializeArray();
