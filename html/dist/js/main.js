@@ -772,6 +772,12 @@ $(document).ready(function () {
   $(document).on("click", ".edit", function (e) {
     e.stopPropagation();
   });
+  $(document).on("click", ".add-new", function (e) {
+    e.stopPropagation();
+    var added = $(this).siblings(".input-group").first().clone().insertBefore($(this).parent().find(".form-text"));
+    $(added[0]).addClass("mt-2");
+    $(added[0]).find("input").val("");
+  });
   $(document).on("click", "#reset-branch", function (e) {
     e.stopPropagation();
     if (window.confirm("Are you sure that drop all modification and get data from repository?")) {

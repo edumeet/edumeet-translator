@@ -1,7 +1,7 @@
 <?php
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 const EDUMEET_TRANSLATIONS = "app/src/intl/translations/";
 const EDUMEET_REPOSITORY = "https://github.com/edumeet/edumeet.git";
@@ -109,6 +109,9 @@ switch ($url[1]) {
         if ($filename = filter_input(INPUT_GET, "filename")) {
             require_once("edit.php");
         }
+        break;
+    case 'config':
+        require_once("config-generator/config-gen.php");
         break;
     default:
         abort(404);

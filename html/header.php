@@ -18,7 +18,7 @@ error_reporting(E_ALL);
 
     <script src="/dist/js/jquery-3.6.0.min.js"></script>
     <script src="/dist/js/jquery-ui.min.js"></script>
-<!--     <script src="/dist/js/jquery.indexeddb.js"></script> -->
+    <script src="/dist/js/jquery.serializejson.js"></script>
     <script src="/dist/js/jquery.cookie.js"></script>
     <script src="/dist/js/all.min.js"></script>
     <script src="/dist/js/jszip.min.js"></script>

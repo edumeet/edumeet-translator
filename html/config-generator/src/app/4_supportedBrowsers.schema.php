@@ -1,0 +1,1 @@
+<?= (new SObject())->setName("app.supportedBrowsers")->setTitle("Supported Browsers")->setClassName("browser")->setHelpText("Supported browsers version in bowser satisfy format.<br>Format: key:value | Default: <b>microsoft edge : >18</b>")->generate(); ?>
