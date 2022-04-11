@@ -105,39 +105,14 @@ require_once(__DIR__ . "/src/input.generator.php");
     }
     $(document).ready(function() {
         $("form").submit(function(e) {
-            var form = $(this);
-            $.ajax({
-                url: form.attr('action'),
-                type: form.attr('method'),
-                data: form.serialize(), // data to be submitted
-                success: function(response) {
-                    alert(response); // do what you like with the response
-                }
+            var selector = $(this),
+            formDataFirst = $(selector).toObject({
+                mode: 'first',
+                nodeCallback: MynodeCallBack
             });
+            console.log(formDataFirst);
             return false;
         });
-        (function($) {
-
-            function test(evt) {
-                evt.preventDefault();
-
-                var selector = $('form'),
-                    formDataFirst = $(selector).toObject({
-                        mode: 'first',
-                        nodeCallback: MynodeCallBack
-                    });
-                console.log(formDataFirst);
-                /*$('#testAreaFirst').html(JSON.stringify(formDataFirst, null, '\t'));
-                $('#testAreaAll').html(JSON.stringify(formDataAll, null, '\t'));
-                $('#testAreaCombine').html(JSON.stringify(formDataCombine, null, '\t'));*/
-            }
-
-            $(function() {
-                $('button[type=submit]').click(test);
-            });
-
-        })(jQuery);
-        //UserInstance = UserInstance.getListOfLanguages(UserInstance);
     });
 </script>
 <?php require_once("footer.php"); ?>
