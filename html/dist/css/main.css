@@ -1,7 +1,9 @@
 th.checkbox::before, th.checkbox::after {
     display: none !important;
 }
-
+body{
+    background-color: #f5f5f5;
+}
 footer {
     position: fixed !important;
     bottom: 2vh;

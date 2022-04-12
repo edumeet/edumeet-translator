@@ -8,7 +8,7 @@
             "screenShare" => "medium"
         ]
     )
-    ->setTitle("networkPriorities")
+    ->setTitle("Network Priorities")
     ->setClassName("browser")
     ->setTooltip("Supported browsers version in bowser satisfy format.")
     ->setHelpText("Format: <b>key : value</b>")

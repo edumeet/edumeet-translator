@@ -89,9 +89,9 @@ class SObject extends Input
         if (!isset($this->IdName)) {
             $this->IdName = uniqid();
         }
-        $ret = "<div class=\"mb-3\">";
+        $ret = "<div class=\"mb-3 pt-3 rounded shadow px-5 py-3 bg-white\">";
         if (isset($this->Title)) {
-            $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label\">" . $this->Title . "</label>";
+            $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label fw-bold mb-3\">" . $this->Title . "</label>";
         }
         foreach ($this->Value as $key => $value) {
             $ret .= "<div class=\"input-group mb-1\">";
@@ -118,15 +118,15 @@ class SObject extends Input
             $ret .= $this->Required ? "required " : "";
             $ret .= $this->Autofocus ? "autofocus " : "";
             $ret .= ">";
-            $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
             if (isset($this->Tooltip)) {
                 $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
             }
-            $ret .= "<button class=\"btn btn-outline-info add-new\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Copy\"><i class=\"fa-solid fa-copy\"></i></button>";
+            $ret .= "<button class=\"btn btn-outline-warning reset\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
+            $ret .= "<button class=\"btn btn-outline-danger delete\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Remove line\"><i class=\"fa-solid fa-trash\"></i></button>";
 
             $ret .= "</div>";
         }
-
+        $ret .= "<div class=\"text-center mt-2 me-5\"><button class=\"btn btn-outline-primary me-5 text-center add-new\" type=\"button\"><i class=\"fa-solid fa-plus\"></i></button></div>";
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";
         }
@@ -157,9 +157,9 @@ class Text extends Input
         if (!isset($this->IdName)) {
             $this->IdName = uniqid();
         }
-        $ret = "<div class=\"mb-3\">";
+        $ret = "<div class=\"mb-3 pt-3 rounded shadow px-5 py-3 bg-white\">";
         if (isset($this->Title)) {
-            $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label\">" . $this->Title . "</label>";
+            $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label fw-bold mb-3\">" . $this->Title . "</label>";
         }
 
         $ret .= "<div class=\"input-group\">";
@@ -175,11 +175,10 @@ class Text extends Input
         $ret .= $this->Required ? "required " : "";
         $ret .= $this->Autofocus ? "autofocus " : "";
         $ret .= ">";
-        $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
-
         if (isset($this->Tooltip)) {
             $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
         }
+        $ret .= "<button class=\"btn btn-outline-warning reset\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
         $ret .= "</div>";
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";
@@ -208,11 +207,11 @@ class Radio extends Input
 
     function generate()
     {
-        $ret = "<div class=\"mb-3\">";
+        $ret = "<div class=\"mb-3 rounded shadow px-5 py-3 bg-white\">";
         if (isset($this->Title)) {
-            $ret .= "<div class=\"form-label\">" . $this->Title . "</div>";
+            $ret .= "<div class=\"form-label fw-bold mb-3\">" . $this->Title . "</div>";
         }
-        $ret .= "<div class=\"d-flex align-items-center\"><div>";
+        $ret .= "<div class=\"d-flex align-items-center justify-content-between\"><div>";
         foreach ($this->Value as $key => $value) {
             if (!isset($this->IdName)) {
                 $this->IdName = uniqid();
@@ -238,12 +237,10 @@ class Radio extends Input
         }
         $ret .= "</div>";
         $ret .= "<div class=\"btn-group ms-5\">";
-
-        $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
-
         if (isset($this->Tooltip)) {
             $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
         }
+        $ret .= "<button class=\"btn btn-outline-warning reset\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
         $ret .= "</div></div>";
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";

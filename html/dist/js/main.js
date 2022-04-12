@@ -772,9 +772,24 @@ $(document).ready(function () {
   $(document).on("click", ".edit", function (e) {
     e.stopPropagation();
   });
+  $(document).on("click", ".reset", function (e) {
+    if (window.confirm("Are you sure that reset this line?")) {
+      $(this).parent().find("input").val("");
+    }
+  });
+  $(document).on("click", ".delete", function (e) {
+    if (window.confirm("Are you sure that drop this line?")) {
+      if($(this).parent().parent().find(".input-group").length>1){
+        $(this).parent().remove();
+      }else{
+        $(this).parent().find("input").val("");
+      }
+    }
+  });
   $(document).on("click", ".add-new", function (e) {
     e.stopPropagation();
-    var added = $(this).siblings(".input-group").first().clone().insertBefore($(this).parent().find(".form-text"));
+    console.log();
+    var added = $(this).parent().siblings(".input-group").first().clone().insertBefore($(this).parent());
     $(added[0]).addClass("mt-2");
     $(added[0]).find("input").val("");
   });

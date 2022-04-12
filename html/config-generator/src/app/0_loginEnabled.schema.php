@@ -1,6 +1,6 @@
 <?= (new Radio())
     ->setName("app.loginEnabled")
-    ->setTitle("Login enabled:")
+    ->setTitle("Login enabled")
     ->setTooltip("If the login is enabled")
     ->setHelpText("Format: <b>Boolean</b>")
     ->setDefaultValue("false")
