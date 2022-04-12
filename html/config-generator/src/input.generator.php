@@ -12,12 +12,24 @@ abstract class Input
     protected bool $Required = false;
     protected bool $Autofocus = false;
     protected string|array $Value;
+    protected string $Tooltip;
+    protected string $DefaultValue;
     //private array $DataTags;
 
     abstract function generate();
 
     function __construct()
     {
+        return $this;
+    }
+    function setDefaultValue(string $str)
+    {
+        $this->DefaultValue = $str;
+        return $this;
+    }
+    function setTooltip(string $str)
+    {
+        $this->Tooltip = $str;
         return $this;
     }
     function setHelpText(string $str)
@@ -81,32 +93,39 @@ class SObject extends Input
         if (isset($this->Title)) {
             $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label\">" . $this->Title . "</label>";
         }
-        $ret.="<a class=\"btn btn-primary ms-2 mb-2 add-new\"><i class=\"fa-solid fa-plus\"></i> Add new</a>";
-        $ret .= "<div class=\"input-group\">";
-        $ret .= "<input ";
-        $ret .= !empty($this->ClassName) ? ('class="form-control ' . $this->ClassName . '" ') : "class=\"form-control\"";
-        $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.key" ') : "";
-        $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
-        $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
-        $ret .= !empty($this->Value) ? ('value="' . $this->Value . '"') : "";
-        $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
-        $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
-        $ret .= $this->Required ? "required " : "";
-        $ret .= $this->Autofocus ? "autofocus " : "";
-        $ret .= ">";
-        $ret .= "  <span class=\"input-group-text\">:</span>";
-        $ret .= "<input ";
-        $ret .= !empty($this->ClassName) ? ('class="form-control ' . $this->ClassName . '" ') : "class=\"form-control\"";
-        $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.value" ') : "";
-        $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
-        $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
-        $ret .= !empty($this->Value) ? ('value="' . $this->Value . '"') : "";
-        $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
-        $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
-        $ret .= $this->Required ? "required " : "";
-        $ret .= $this->Autofocus ? "autofocus " : "";
-        $ret .= ">";
-        $ret .= "</div>";
+        foreach ($this->Value as $key => $value) {
+            $ret .= "<div class=\"input-group mb-1\">";
+            $ret .= "<input ";
+            $ret .= !empty($this->ClassName) ? ('class="form-control ' . $this->ClassName . '" ') : "class=\"form-control\"";
+            $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.key" ') : "";
+            $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
+            $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
+            $ret .= !empty($key) ? ('value="' . $key . '"') : "";
+            $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
+            $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
+            $ret .= $this->Required ? "required " : "";
+            $ret .= $this->Autofocus ? "autofocus " : "";
+            $ret .= ">";
+            $ret .= "  <span class=\"input-group-text\">:</span>";
+            $ret .= "<input ";
+            $ret .= !empty($this->ClassName) ? ('class="form-control ' . $this->ClassName . '" ') : "class=\"form-control\"";
+            $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.value" ') : "";
+            $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
+            $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
+            $ret .= !empty($value) ? ('value="' . $value . '"') : "";
+            $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
+            $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
+            $ret .= $this->Required ? "required " : "";
+            $ret .= $this->Autofocus ? "autofocus " : "";
+            $ret .= ">";
+            $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
+            if (isset($this->Tooltip)) {
+                $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
+            }
+            $ret .= "<button class=\"btn btn-outline-info add-new\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Copy\"><i class=\"fa-solid fa-copy\"></i></button>";
+
+            $ret .= "</div>";
+        }
 
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";
@@ -121,7 +140,7 @@ class SObject extends Input
     }
     function setValue($str)
     {
-        if (!is_array($str)) {
+        if (is_array($str)) {
             $this->Value = $str;
             return $this;
         } else {
@@ -142,6 +161,9 @@ class Text extends Input
         if (isset($this->Title)) {
             $ret .= "<label for=\"" . $this->IdName . "\" class=\"form-label\">" . $this->Title . "</label>";
         }
+
+        $ret .= "<div class=\"input-group\">";
+
         $ret .= "<input ";
         $ret .= !empty($this->ClassName) ? ('class="form-control ' . $this->ClassName . '" ') : "class=\"form-control\"";
         $ret .= !empty($this->Name) ? ('name="' . $this->Name . '" ') : "";
@@ -153,6 +175,12 @@ class Text extends Input
         $ret .= $this->Required ? "required " : "";
         $ret .= $this->Autofocus ? "autofocus " : "";
         $ret .= ">";
+        $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
+
+        if (isset($this->Tooltip)) {
+            $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
+        }
+        $ret .= "</div>";
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";
         }
@@ -184,11 +212,12 @@ class Radio extends Input
         if (isset($this->Title)) {
             $ret .= "<div class=\"form-label\">" . $this->Title . "</div>";
         }
+        $ret .= "<div class=\"d-flex align-items-center\"><div>";
         foreach ($this->Value as $key => $value) {
             if (!isset($this->IdName)) {
                 $this->IdName = uniqid();
             }
-            $ret .= "<div class=\"form-check form-check-inline\">";
+            $ret .= "<div class=\"form-check\">";
 
 
             $ret .= "<input ";
@@ -200,10 +229,22 @@ class Radio extends Input
             $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
             $ret .= $this->Required ? "required " : "";
             $ret .= $this->Autofocus ? "autofocus " : "";
+            if ($this->DefaultValue == $key) {
+                $ret .= "checked ";
+            }
             $ret .= ">";
             $ret .= "<label for=\"" . $this->IdName . $key . "\" class=\"form-check-label\">" . $value . "</label>";
             $ret .= "</div>";
         }
+        $ret .= "</div>";
+        $ret .= "<div class=\"btn-group ms-5\">";
+
+        $ret .= "<button class=\"btn btn-outline-warning\" type=\"reset\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Reset to default\"><i class=\"fa-solid fa-rotate\"></i></button>";
+
+        if (isset($this->Tooltip)) {
+            $ret .= "<button class=\"btn btn-outline-primary\" type=\"button\" data-ba-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"" . $this->Tooltip . "\"><i class=\"fa-solid fa-circle-info\"></i></button>";
+        }
+        $ret .= "</div></div>";
         if (isset($this->HelpText)) {
             $ret .= "<div class=\"form-text\">" . $this->HelpText . "</div>";
         }
