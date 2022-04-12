@@ -100,7 +100,7 @@ class SObject extends Input
             $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.key" ') : "";
             $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
             $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
-            $ret .= !empty($key) ? ('value="' . $key . '"') : "";
+            $ret .= !empty($key) ? ('data-default="'.$key.'" value="' . $key . '"') : "";
             $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
             $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
             $ret .= $this->Required ? "required " : "";
@@ -112,7 +112,7 @@ class SObject extends Input
             $ret .= !empty($this->Name) ? ('name="' . $this->Name . '.value" ') : "";
             $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
             $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
-            $ret .= !empty($value) ? ('value="' . $value . '"') : "";
+            $ret .= !empty($value) ? ('data-default="'.$value.'" value="' . $value . '"') : "";
             $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
             $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
             $ret .= $this->Required ? "required " : "";
@@ -169,7 +169,7 @@ class Text extends Input
         $ret .= !empty($this->Name) ? ('name="' . $this->Name . '" ') : "";
         $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . '" ') : "";
         $ret .= !empty($this->Pattern) ? ('pattern="' . $this->Pattern . '"') : "";
-        $ret .= !empty($this->Value) ? ('value="' . $this->Value . '"') : "";
+        $ret .= !empty($this->Value) ? ('data-default="'.$this->Value.'" value="' . $this->Value . '"') : "";
         $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
         $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
         $ret .= $this->Required ? "required " : "";
@@ -223,7 +223,7 @@ class Radio extends Input
             $ret .= !empty($this->ClassName) ? ('class="form-check-input ' . $this->ClassName . '" ') : "class=\"form-check-input\"";
             $ret .= !empty($this->Name) ? ('name="' . $this->Name . '" ') : "";
             $ret .= !empty($this->IdName) ? ('id="' . $this->IdName . $key . '" ') : "";
-            $ret .= !empty($value) ? ('value="' . $value . '"') : "";
+            $ret .= !empty($value) ? ('data-default="'.$this->DefaultValue.'" value="' . $value . '"') : "";
             $ret .= !empty($this->Type) ? ('type="' . $this->Type . '" ') : "";
             $ret .= !empty($this->Placeholder) ? ('placeholder="' . $this->Placeholder . '" ') : "";
             $ret .= $this->Required ? "required " : "";

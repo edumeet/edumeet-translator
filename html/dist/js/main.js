@@ -774,14 +774,20 @@ $(document).ready(function () {
   });
   $(document).on("click", ".reset", function (e) {
     if (window.confirm("Are you sure that reset this line?")) {
-      $(this).parent().find("input").val("");
+      $(this).parent().find('input:not([type="radio"])').each(function () {
+        $(this).val($(this).data("default"));
+      });
+      $(this).parent().parent().find('input[type="radio"]').each(function () {
+        console.log($(this).val() + "=" + $(this).data("default"));
+        ($(this).val().toString() == $(this).data("default").toString()) ? $(this).prop("checked", true) : $(this).removeAttr("checked");
+      });
     }
   });
   $(document).on("click", ".delete", function (e) {
     if (window.confirm("Are you sure that drop this line?")) {
-      if($(this).parent().parent().find(".input-group").length>1){
+      if ($(this).parent().parent().find(".input-group").length > 1) {
         $(this).parent().remove();
-      }else{
+      } else {
         $(this).parent().find("input").val("");
       }
     }
@@ -792,6 +798,7 @@ $(document).ready(function () {
     var added = $(this).parent().siblings(".input-group").first().clone().insertBefore($(this).parent());
     $(added[0]).addClass("mt-2");
     $(added[0]).find("input").val("");
+    $(added[0]).find("input").removeAttr("data-default");
   });
   $(document).on("click", "#reset-branch", function (e) {
     e.stopPropagation();
