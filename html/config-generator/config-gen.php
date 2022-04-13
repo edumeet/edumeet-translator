@@ -90,26 +90,61 @@ require_once(__DIR__ . "/src/input.generator.php");
     function MynodeCallBack(node) {
         if ($(node).attr("name") != null) {
             if ($(node).attr("name").indexOf(".key") >= 0) {
-                return {
-                    name: $(node).attr("name").replace("key", $(node).val()),
-                    value: $(node).siblings("input").val()
-                };
+                if ($(node).parent().parent().hasClass("sub-object")) {
+                    var pval = $(node).parent().parent().parent().find("input").first().val();
+                    return {
+                        name: $(node).attr("name").replace("key", pval+"."+$(node).val()),
+                        value: $(node).siblings("input").val()
+                    }
+                }else if ($(node).parent().find(".sub-object").children().length == 0) {
+                    return {
+                        name: $(node).attr("name").replace("key", $(node).val()),
+                        value: $(node).siblings("input").val()
+                    };
+                } else {
+                    return {
+                        name: "null",
+                        value: "null"
+                    };
+                }
             } else if ($(node).attr("name").indexOf(".value") >= 0) {
-                return {
-                    name: $(node).siblings("input").attr("name").replace("key", $(node).siblings("input").val()),
-                    value: $(node).val()
-                };
+                if ($(node).parent().parent().hasClass("sub-object")) {
+                    var pval = $(node).parent().parent().parent().find("input").first().val();
+                    return {
+                        name: $(node).siblings("input").attr("name").replace("key", pval+"."+$(node).siblings("input").val()),
+                        value: $(node).siblings("input").val()
+                    }
+                }
+                else if ($(node).parent().find(".sub-object").children().length == 0) {
+                    return {
+                        name: $(node).siblings("input").attr("name").replace("key", $(node).siblings("input").val()),
+                        value: $(node).val()
+                    };
+                } else {
+                    return {
+                        name: "null",
+                        value: "null"
+                    };
+                }
             }
         }
         return false;
     }
     $(document).ready(function() {
+        $(document).on("click", ".setSObject", function() {
+            var sub = $(this).parent().parent().parent().find(".sub-object");
+            sub.attr("style", "width:100%;margin-left:20px;");
+            var added = $(this).parent().parent().parent().clone().appendTo(sub);
+            $(this).parent().parent().parent().children("input").last().attr("disabled","disabled").val("");
+            $(added[0]).find("input").val("");
+            $(added[0]).find(".dropdown-toggle").hide();
+        });
         $("form").submit(function(e) {
             var selector = $(this),
-            formDataFirst = $(selector).toObject({
-                mode: 'first',
-                nodeCallback: MynodeCallBack
-            });
+                formDataFirst = $(selector).toObject({
+                    mode: 'first',
+                    nodeCallback: MynodeCallBack
+                });
             console.log(formDataFirst);
             return false;
         });

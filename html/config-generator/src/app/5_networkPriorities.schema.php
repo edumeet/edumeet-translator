@@ -1,16 +1,15 @@
-<?= (new SObject())
-    ->setName("app.networkPriorities")
-    ->setValue(
-        [
-            "audio" => "high",
-            "mainVideo" => "high",
-            "additionalVideos" => "medium",
-            "screenShare" => "medium"
-        ]
-    )
-    ->setTitle("Network Priorities")
-    ->setClassName("browser")
-    ->setTooltip("Supported browsers version in bowser satisfy format.")
-    ->setHelpText("Format: <b>key : value</b>")
-    ->generate();
-?>
+<?php
+$instances[] = [
+    "type" => "SObject",
+    "class" => "browser",
+    "name" => "app.networkPriorities",
+    "title" => "Network Priorities",
+    "tooltip" => "Supported browsers version in bowser satisfy format.",
+    "helptext" => "Format: <b>key : value</b>",
+    "value" => [
+        "audio" => "high",
+        "mainVideo" => "high",
+        "additionalVideos" => "medium",
+        "screenShare" => "medium"
+    ]
+];

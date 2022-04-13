@@ -1,9 +1,14 @@
-<?= (new Radio())
-    ->setName("app.loginEnabled")
-    ->setTitle("Login enabled")
-    ->setTooltip("If the login is enabled")
-    ->setHelpText("Format: <b>Boolean</b>")
-    ->setDefaultValue("false")
-    ->setValue(["true" => "true", "false" => "false"])
-    ->setRequired(true)->generate();
-?>
+<?php
+$instances[] = [
+    "type" => "radio",
+    "name" => "app.loginEnabled",
+    "title" => "Login enabled",
+    "tooltip" => "If the login is enabled",
+    "helptext" => "Format: <b>Boolean</b>",
+    "defaultValue" => "false",
+    "value" => [
+        "true" => "true",
+        "false" => "false"
+    ],
+    "required" => true
+];
