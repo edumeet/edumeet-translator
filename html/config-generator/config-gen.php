@@ -93,10 +93,10 @@ require_once(__DIR__ . "/src/input.generator.php");
                 if ($(node).parent().parent().hasClass("sub-object")) {
                     var pval = $(node).parent().parent().parent().find("input").first().val();
                     return {
-                        name: $(node).attr("name").replace("key", pval+"."+$(node).val()),
+                        name: $(node).attr("name").replace("key", pval + "." + $(node).val()),
                         value: $(node).siblings("input").val()
                     }
-                }else if ($(node).parent().find(".sub-object").children().length == 0) {
+                } else if ($(node).parent().find(".sub-object").children().length == 0) {
                     return {
                         name: $(node).attr("name").replace("key", $(node).val()),
                         value: $(node).siblings("input").val()
@@ -111,11 +111,10 @@ require_once(__DIR__ . "/src/input.generator.php");
                 if ($(node).parent().parent().hasClass("sub-object")) {
                     var pval = $(node).parent().parent().parent().find("input").first().val();
                     return {
-                        name: $(node).siblings("input").attr("name").replace("key", pval+"."+$(node).siblings("input").val()),
+                        name: $(node).siblings("input").attr("name").replace("key", pval + "." + $(node).siblings("input").val()),
                         value: $(node).siblings("input").val()
                     }
-                }
-                else if ($(node).parent().find(".sub-object").children().length == 0) {
+                } else if ($(node).parent().find(".sub-object").children().length == 0) {
                     return {
                         name: $(node).siblings("input").attr("name").replace("key", $(node).siblings("input").val()),
                         value: $(node).val()
@@ -131,13 +130,26 @@ require_once(__DIR__ . "/src/input.generator.php");
         return false;
     }
     $(document).ready(function() {
+        $(document).on("click", ".textObject", function() {
+            var sub = $(this).parent().parent().parent().find(".sub-object").first();
+            console.log(sub);
+            sub.attr("style","");
+            sub.text("");
+            console.log($(this).parent().parent().parent().children("input").last().removeAttr("disabled"));
+
+        });
         $(document).on("click", ".setSObject", function() {
-            var sub = $(this).parent().parent().parent().find(".sub-object");
-            sub.attr("style", "width:100%;margin-left:20px;");
-            var added = $(this).parent().parent().parent().clone().appendTo(sub);
-            $(this).parent().parent().parent().children("input").last().attr("disabled","disabled").val("");
-            $(added[0]).find("input").val("");
-            $(added[0]).find(".dropdown-toggle").hide();
+            var sub = $(this).parent().parent().parent().find(".sub-object").first();
+
+            if (sub.children().length == 0) {
+                sub.attr("style", "width:100%;margin-left:20px;");
+                var added = $(this).parent().parent().parent().clone().appendTo(sub);
+                console.log(added);
+                $(this).parent().parent().parent().children("input").last().attr("disabled", "disabled").val("");
+                $(added[0]).find("input").val("");
+                $(added[0]).find(".dropdown-toggle").hide();
+            }
+
         });
         $("form").submit(function(e) {
             var selector = $(this),

@@ -7,6 +7,10 @@ $instances[] = [
     "tooltip" => "Supported browsers version in bowser satisfy format.",
     "helptext" => "Format: <b>key : value</b>",
     "value" => [
+        "windows" => [
+            "internet explorer" => ">12",
+            "microsoft edge" => ">18"
+        ],
         "microsoft edge" => ">18",
         "safari" => ">12",
         "firefox" => ">=60",
