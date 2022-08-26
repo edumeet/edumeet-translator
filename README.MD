@@ -12,3 +12,4 @@ sudo curl -sSL https://get.docker.com/ | sh
 ```sh
 ./build_and_run.sh -b -r
 ```
+Live Demo site : https://translator.letsmeet.hu/
