@@ -45,7 +45,7 @@ function getData($id)
 function cloneRepo($userID, $branch = "main")
 {
     if (!preg_match("[^A-Za-z0-9]", $userID)) {
-        return execPrint("cd /tmp;git clone --depth 1 --branch=main --single-branch " . EDUMEET_REPOSITORY . " " . $userID . ";cd $userID;git sparse-checkout set ".EDUMEET_TRANSLATIONS);
+        return execPrint("cd /tmp;git clone --depth 1 -q --branch=main --single-branch " . EDUMEET_REPOSITORY . " " . $userID . ";cd $userID;git sparse-checkout set ".EDUMEET_TRANSLATIONS);
     }
 }
 function rmTmp($userID)
@@ -76,7 +76,7 @@ switch ($url[1]) {
                         break;
                     case 'branch':
                         header('Content-Type: application/json; charset=utf-8');
-                        echo execPrint("cd /tmp/edumeet; git pull; git branch -a | grep remotes | grep -v HEAD");
+                        echo execPrint("cd /tmp/edumeet; git -q pull; git branch -a | grep remotes | grep -v HEAD");
                         break;
                     default:
                         abort(404);
