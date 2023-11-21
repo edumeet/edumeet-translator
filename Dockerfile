@@ -14,6 +14,8 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 
 RUN a2enmod rewrite
 
-RUN git clone https://github.com/edumeet/edumeet.git /tmp/edumeet
+RUN git clone https://github.com/edumeet/edumeet-client.git /tmp/edumeet
+
+RUN chown www-data:www-data -R /tmp/edumeet
 
 EXPOSE 8080

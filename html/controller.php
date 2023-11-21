@@ -3,8 +3,8 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
-const EDUMEET_TRANSLATIONS = "app/src/intl/translations/";
-const EDUMEET_REPOSITORY = "https://github.com/edumeet/edumeet.git";
+const EDUMEET_TRANSLATIONS = "src/translations/";
+const EDUMEET_REPOSITORY = "https://github.com/edumeet/edumeet-client.git";
 
 $fullUrl = explode("?", $_SERVER['REQUEST_URI']);
 $url = explode("/", $fullUrl[0]);
@@ -42,10 +42,10 @@ function getData($id)
     }
     return $translations;
 }
-function cloneRepo($userID, $branch = "master")
+function cloneRepo($userID, $branch = "main")
 {
     if (!preg_match("[^A-Za-z0-9]", $userID)) {
-        return execPrint("cd /tmp;git clone --depth 1 --branch=master --single-branch " . EDUMEET_REPOSITORY . " " . $userID . ";cd $userID;git sparse-checkout set app/src/intl/");
+        return execPrint("cd /tmp;git clone --depth 1 -q --branch=main --single-branch " . EDUMEET_REPOSITORY . " " . $userID . ";cd $userID;git sparse-checkout set ".EDUMEET_TRANSLATIONS);
     }
 }
 function rmTmp($userID)
@@ -71,12 +71,12 @@ switch ($url[1]) {
                     case 'create':
                         header('Content-Type: application/json; charset=utf-8');
                         cloneRepo($userID);
-                        echo json_encode(["uniqid" => $userID, "branch" => "master", "data" => getData($userID), "locales" => file_get_contents("/tmp/$userID/app/src/intl/locales.ts")]);
+                        echo json_encode(["uniqid" => $userID, "branch" => "main", "data" => getData($userID), "locales" => file_get_contents("https://raw.githubusercontent.com/edumeet/edumeet/master/app/src/intl/locales.ts")]);
                         rmTmp($userID);
                         break;
                     case 'branch':
                         header('Content-Type: application/json; charset=utf-8');
-                        echo execPrint("cd /tmp/edumeet; git pull; git branch -a | grep remotes | grep -v HEAD");
+                        echo execPrint("cd /tmp/edumeet; git -q pull; git branch -a | grep remotes | grep -v HEAD");
                         break;
                     default:
                         abort(404);
@@ -89,7 +89,7 @@ switch ($url[1]) {
                         if (!empty($branch = filter_input(INPUT_POST, "branch"))) {
                             header('Content-Type: application/json; charset=utf-8');
                             cloneRepo($userID, $branch);
-                            echo json_encode(["uniqid" => $userID, "branch" => $branch, "data" => getData($userID), "locales" => file_get_contents("/tmp/$userID/app/src/intl/locales.ts")]);
+                            echo json_encode(["uniqid" => $userID, "branch" => $branch, "data" => getData($userID), "locales" => file_get_contents("https://raw.githubusercontent.com/edumeet/edumeet/master/app/src/intl/locales.ts")]);
                             rmTmp($userID);
                         } else {
                             abort(404);

@@ -664,7 +664,7 @@ var App = {
 
   downloadAll(self) {
     var zip = new JSZip();
-    var app = zip.folder("app").folder("src").folder("intl").folder("translations");
+    var app = zip.folder("app").folder("src").folder("translations");
     $.each(JSON.parse(localStorage.getItem(self.currentBranch)), function (lang, content) {
       app.file(lang, JSON.stringify(content, undefined, 2));
     });
@@ -681,7 +681,7 @@ var App = {
 
   downloadSelected(self) {
     var zip = new JSZip();
-    var app = zip.folder("app").folder("src").folder("intl").folder("translations");
+    var app = zip.folder("app").folder("src").folder("translations");
     var selected = self.tables.$("input:checked").serializeArray();
     if (selected.length === 0) {
       msg("alert-danger", "<strong>Error:</strong> Please select one or more language files!");
