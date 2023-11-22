@@ -35,7 +35,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <select class="form-select" id="set-branch"></select>
+                <div class="text-center">
+                    <div class="text-muted text-start mb-3">Change branch:</div>
+                    <select class="form-select" id="set-branch"></select>
+                </div>
+                <div class="text-center mt-5 pt-2 border-top">
+                    <div class="text-muted text-start mb-3">Drop all modification and get data from repository</div>
+                    <button class="btn btn-danger" id="reset-branch">Reset data</button>
+                </div>
             </div>
         </div>
     </div>
