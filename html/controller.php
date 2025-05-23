@@ -76,7 +76,7 @@ switch ($url[1]) {
                         break;
                     case 'branch':
                         header('Content-Type: application/json; charset=utf-8');
-                        echo execPrint("cd /tmp/edumeet; git -q pull; git branch -a | grep remotes | grep -v HEAD");
+                        echo execPrint("cd /tmp/edumeet; git pull -q; git branch -a | grep remotes | grep -v HEAD");
                         break;
                     default:
                         abort(404);
